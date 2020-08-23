@@ -1,0 +1,100 @@
+Cenário de teste 1: Preencher todos os campos
+DADO que eu acesse a página html "toTest"
+QUANDO eu preencher todos os campos
+E clicar no botão "cadastrar"
+ENTÃO o sistema deve exibir toda as informações cadastradas
+
+Cenário de teste 2:  Validar campo obrigatório "Nome"
+DADO que eu acesse a página html "toTest"
+QUANDO eu não preencher o campo "nome"
+E clicar no botão "cadastrar"
+ENTÃO o sistema exibe o alerta com a mensagem "Nome eh obrigatorio"
+
+Cenário de teste 3: Validar campo obrigatório "Sobrenome"
+DADO que eu acesse a página html "toTest"
+E preencha o campo "Nome"
+QUANDO eu não preencher o campo "sobrenome"
+E clicar no botão "cadastrar"
+ENTÃO o sistema exibe o alerta com a mensagem "Sobrenome eh obrigatorio"
+
+Cenário de teste 4: Validar campo obrigatório "Sexo"
+DADO que eu acesse a página html "toTest"
+E preencha os campos "Nome" e "Sobrenome"
+QUANDO eu não marcar a opção "sexo"
+E clicar no botão "cadastrar"
+ENTÃO o sistema exibe o alerta com a mensagem "Sexo eh obrigatorio"
+
+Cenário de teste 5: Validar exibição de alerta para pessoas vegetarianas
+DADO que eu acesse a página html "toTest"
+E preencha todos os campos obrigatórios
+QUANDO eu clicar na opção "vegetariano"
+E nas opções "frango" ou "carne"
+ENTÃO o sistema exibe o alerta com a mensagem "Tem certeza que voce eh vegetariano?"
+
+Cenário de teste 6: Validar informação retornada no alerta da tabela escolaridade
+DADO que eu acesse a página html "toTest"
+QUANDO eu clicar no botão "Clique aqui"
+ENTÃO o sistema exibe o alerta com o nome correspondente da tabela
+
+Cenário de teste 7: Validar mensagem exibida ao clicar no botão "Clique Me!"
+DADO que eu acesse a página html "toTest"
+QUANDO eu clicar no botão "Clique Me!"
+ENTÃO o sistema exibe a mensagem "Obrigado!" no botão
+
+Cenário de teste 8: Validar exibição de Popup ao clicar no botão "Abrir Popup"
+DADO que eu acesse a página html "toTest"
+QUANDO eu clicar no botão "Abrir Popup"
+ENTÃO o sistema exibe um popup com um campo texto
+
+Cenário de teste 9: Validar exibição de Popup ao clicar no botão "Abrir Popup do Mal"
+DADO que eu acesse a página html "toTest"
+QUANDO eu clicar no botão "Abrir Popup do Mal"
+ENTÃO o sistema exibe um popup com um campo texto
+
+Cenário de teste 10: Validar tempo de resposta ao clicar no botão "Resposta Demorada"
+DADO que eu acesse a página html "toTest"
+QUANDO eu clicar no botão "Resposta Demorada"
+E aguardar 3 segundos
+ENTÃO o sistema deve exibir um campo texto
+
+Cenário de teste 11: Validar se o sistema exibe um alerta ao clicar no botão "Alert"
+DADO que eu acesse a página html "toTest"
+QUANDO eu clicar no botão "Alert"
+ENTÃO o sistema vai exibir um alerta com a mensagem "Alert Simples"
+
+Cenário de teste 12: Validar se o sisteme exibe um alerta ao clicar no botão "Confirm"
+DADO que eu acesse a página html "toTest"
+QUANDO eu clicar no botão "Confirm"
+ENTÃO o sistema deve exibir a mensagem "Confirm Simples"
+
+Cenário de teste 13: Validar confirmação de alerta ao clicar no botão "Confirm"
+DADO que eu acesse a página html "toTest"
+E clique no botão "Confirm"
+Quando eu clicar no botão "OK"
+ENTÃO o sistema vai retornar a mensagem "Confirmado"
+
+Cenário de teste 14: Validar cancelamento do alerta ao clicar no botão "Confirm"
+DADO que eu acesse a página html "toTest"
+E clique no botão "Confirm"
+Quando eu clicar no botão "Cancelar"
+ENTÃO o sistema vai retornar a mensagem "Negado"
+
+Cenário de teste 15: Validar se o sisteme exibe um prompt ao clicar no botão "Prompt"
+DADO que eu acesse a página html "toTest"
+Quando eu clicar no botão "Prompt"
+ENTÃO o sistema deve abrir uma nova janela com a mensagem "Digite um numero" 
+E um campo texto para ser preenchido
+
+Cenário de teste 16: Validar confirmação do prompt ao clicar no botão "Prompt"
+DADO que eu acesse a página html "toTest"
+E clique no botão "Prompt"
+Quando eu preencher o campo de texto
+E clicar no botão "OK"
+ENTÃO o sistema vai retornar a mensagem ":D"
+
+Cenário de teste 17: Validar negação do prompt ao clicar no botão "Prompt"
+DADO que eu acesse a página html "toTest"
+E clique no botão "Prompt"
+Quando eu preencher o campo de texto
+E clicar no botão "Cancelar"
+ENTÃO o sistema vai retornar a mensagem ":("
