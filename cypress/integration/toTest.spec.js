@@ -100,8 +100,79 @@ describe("Cenários de test para a página toTest", () => {
     cy.get("input[value='Obrigado!']").should("be.visible");
   });
 
-  it.only("Validar exibição de Popup ao clicar no botão 'Abrir Popup'", () => {
+  it("Validar exibição de Popup ao clicar no botão 'Abrir Popup'", () => {
+    cy.window().then((win) => {
+      cy.stub(win, "createPopup").as("popupOpen");
+    })
     cy.get("#buttonPopUpEasy").click();
+    cy.get('@popupOpen').should('be.calledWith', 'Popup');
   });
 
+  it("Validar exibição de Popup ao clicar no botão 'Abrir Popup do Mal'", () => {
+    cy.window().then((win) => {
+      cy.stub(win, "createPopup").as("popupOpen");
+    })
+    cy.get("#buttonPopUpHard").click();
+    cy.get('@popupOpen').should('be.calledWith', '');
+  });
+
+  it("Validar tempo de resposta ao clicar no botão 'Resposta Demorada'", () => {
+    cy.get("#buttonDelay").click();
+    cy.wait(3000);
+    cy.get("#novoCampo").type("valheu");
+  });
+
+  it("Validar se o sistema exibe um alerta ao clicar no botão 'Alert'", () => {
+    const stub = cy.stub();
+    cy.on("window:alert", stub);
+    cy.get("#alert").click().then(() => {
+      expect(stub.getCall(0)).to.be.calledWith("Alert Simples");
+    });
+  });
+
+  it("Validar se o sisteme exibe um alerta ao clicar no botão 'Confirm'", () => {
+    const stub = cy.stub();
+    cy.on("window:confirm", stub);
+    cy.get("#confirm").click().then(() => {
+      expect(stub.getCall(0)).to.be.calledWith("Confirm Simples");
+    });
+  });
+
+  it("Validar confirmação do alerta ao clicar no botão 'Confirm'", () => {
+    cy.get("#confirm").click();
+    cy.on("window:alert", (win) => {
+      expect(win).to.contains("Confirmado");
+    });
+  });
+
+  it("Validar cancelamento do alerta ao clicar no botão 'Confirm'", () => {
+    cy.get("#confirm").click();
+    cy.window().then((win) => {
+      cy.stub(win, "alert").as("cancelAlert");
+      win.alert("Negado");
+      cy.get('@cancelAlert').should('be.calledWith', 'Negado');
+    });
+  });
+
+  it("Validar se o sisteme exibe um prompt ao clicar no botão 'Prompt'", () => {
+    cy.window().then((win) => {
+      cy.stub(win, "prompt").as("verificaPrompt");
+    });
+    cy.get("#prompt").click();
+    cy.get("@verificaPrompt").should("be.calledWith", "Digite um numero");
+  });
+
+  it("Validar confirmação do prompt ao clicar no botão 'Prompt'", () => {
+    const digitaPrompt = "digitei"
+    cy.window().then((win) => {
+      cy.stub(win, "prompt").returns(`${digitaPrompt}`).as("verificaPrompt");
+    });
+    cy.window().then((win) => {
+      cy.stub(win, "confirm").as("confirmaPrompt");
+    });
+
+    cy.get("#prompt").click();
+    cy.get("@confirmaPrompt").should("be.calledWith", `Era ${digitaPrompt}?`);
+  });
+  
 });
