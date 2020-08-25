@@ -87,7 +87,7 @@ describe("Cenários de test para a página toTest", () => {
     });
   });
 
-  it("Validar informação retornada no alerta da tabela escolaridade", () => {
+  it("Validar informação exibida ao clicar em um botão da tabela Escolaridade", () => {
     const stub = cy.stub();
     cy.on("window:alert", stub);
     cy.xpath("//td[text()='Maria']/following-sibling::td/child::input[@type='button']").click().then(() => {
@@ -105,7 +105,7 @@ describe("Cenários de test para a página toTest", () => {
       cy.stub(win, "createPopup").as("popupOpen");
     })
     cy.get("#buttonPopUpEasy").click();
-    cy.get('@popupOpen').should('be.calledWith', 'Popup');
+    cy.get("@popupOpen").should("be.calledWith", "Popup");
   });
 
   it("Validar exibição de Popup ao clicar no botão 'Abrir Popup do Mal'", () => {
@@ -113,13 +113,14 @@ describe("Cenários de test para a página toTest", () => {
       cy.stub(win, "createPopup").as("popupOpen");
     })
     cy.get("#buttonPopUpHard").click();
-    cy.get('@popupOpen').should('be.calledWith', '');
+    cy.get("@popupOpen").should("be.calledWith", "");
   });
 
   it("Validar tempo de resposta ao clicar no botão 'Resposta Demorada'", () => {
     cy.get("#buttonDelay").click();
     cy.wait(3000);
-    cy.get("#novoCampo").type("valheu");
+
+    cy.get("#novoCampo").should("be.visible");
   });
 
   it("Validar se o sistema exibe um alerta ao clicar no botão 'Alert'", () => {
@@ -165,7 +166,7 @@ describe("Cenários de test para a página toTest", () => {
   it("Validar confirmação do prompt ao clicar no botão 'Prompt'", () => {
     const digitaPrompt = "digitei"
     cy.window().then((win) => {
-      cy.stub(win, "prompt").returns(`${digitaPrompt}`).as("verificaPrompt");
+      cy.stub(win, "prompt").returns(digitaPrompt).as("verificaPrompt");
     });
     cy.window().then((win) => {
       cy.stub(win, "confirm").as("confirmaPrompt");
