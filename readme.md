@@ -23,9 +23,9 @@ Você pode achar mais informações sobre a instalação no site oficial do Node
 Para verificar que a instalação foi feita com sucesso, você pode seguir os seguintes comandos. 
 
    ```bash
-$ node --version v12.14.1
+$ node --version
 
-$ npm --version 6.13.4
+$ npm --version
   ```
   
 ## Clonando o projeto
