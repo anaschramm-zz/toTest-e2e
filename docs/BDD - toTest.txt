@@ -31,7 +31,7 @@ QUANDO eu clicar na opção "vegetariano"
 E nas opções "frango" ou "carne"
 ENTÃO o sistema exibe o alerta com a mensagem "Tem certeza que voce eh vegetariano?"
 
-Cenário de teste 6: Validar informação retornada no alerta da tabela escolaridade
+Cenário de teste 6: Validar informação exibida ao clicar em um botão da tabela Escolaridade
 DADO que eu acesse a página html "toTest"
 QUANDO eu clicar no botão "Clique aqui"
 ENTÃO o sistema exibe o alerta com o nome correspondente da tabela
